@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 
-const { getUsersModel, addUserModel, assignRoleModel, deleteUserModel, updateStatusModel, getUserByIdModel } = require("../models/user.model");
+const { getUsersModel, addUserModel, assignRoleModel, deleteUserModel, updateStatusModel, getUserByIdModel, updateUserModel } = require("../models/user.model");
 
 const getusers = (req, res, next) => {
     getUsersModel((err, result) => {
@@ -44,8 +44,17 @@ const updateStatus = (req, res, next) => {
 const getusersById = (req, res, next) => {
     getUserByIdModel(req.params.user_id, (err, result) => {
         if (err) return next(err);
-        res.send({ success: true, message: "User information fetched successfully", data: result });
+        if (!result.length) return res.status(404).send({ success: false, message: "User not found", data: null });
+        res.send({ success: true, message: "User information fetched successfully", data: result[0] });
     });
 };
 
-module.exports = { getusers, adduser, deleteuser, updateStatus, getusersById };
+const updateuser = (req, res, next) => {
+    updateUserModel(req.params.user_id, req.body, (err, result) => {
+        if (err) return next(err);
+        if (!result.affectedRows) return res.status(404).send({ success: false, message: "User not found", data: null });
+        res.send({ success: true, message: "User updated successfully", data: result });
+    });
+};
+
+module.exports = { getusers, adduser, deleteuser, updateStatus, getusersById, updateuser };

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import moment from "moment";
+
 import UserViewModal from "./UserViewModal";
 import UserUpdateModal from "./UserUpdateModal";
 import UserAddModal from "./UserAddModal";
@@ -9,29 +10,25 @@ import { HiOutlineArchive } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
 import { AiFillEye } from "react-icons/ai";
 
-import { getRoles } from "../../services/role.service"
+import { getRoles } from "../../services/role.service";
 import {
     getUsers,
     addUser as addUserApi,
     deleteUser as deleteUserApi,
     updateUserStatus,
-    updateUser as updateUserApi,
-    getUsersById as getUsersByIdService
+    updateUser as updateUserApi
 } from "../../services/user.service";
 
 export default function Users() {
     const [users, setUsers] = useState([]);
     const [allRoles, setallRoles] = useState([]);
     const [Role, setRole] = useState("");
-
     const [name, setname] = useState();
     const [email, setemail] = useState();
     const [pass, setpass] = useState();
-
     const [open, setOpen] = useState(false);
     const [updateOpen, setUpdateOpen] = useState(false);
     const [updateUserId, setUpdateUserId] = useState(null);
-
     const [viewOpen, setViewOpen] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState(null);
 
@@ -50,16 +47,6 @@ export default function Users() {
         }
     };
 
-    // GET UserById
-    const fetchUserById = async (uid) => {
-        try {
-            const res = await getUsersByIdService(uid);
-            setSelectedUserId(res.data.data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
     // GET roles
     const fetchRoles = async () => {
         try {
@@ -72,7 +59,6 @@ export default function Users() {
 
     useEffect(() => {
         fetchUsers();
-        // fetchRoles();
     }, []);
 
     // ADD user
@@ -85,7 +71,7 @@ export default function Users() {
                 role_id: Role
             });
 
-            fetchUsers();
+            await fetchUsers();
             setOpen(false);
         } catch (err) {
             console.log(err);
@@ -95,12 +81,11 @@ export default function Users() {
     // DELETE user
     const deleteuser = async (id) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this user?");
-
         if (!confirmDelete) return;
 
         try {
             await deleteUserApi(id);
-            fetchUsers();
+            await fetchUsers();
         } catch (err) {
             console.log(err);
         }
@@ -111,11 +96,8 @@ export default function Users() {
         const newStatus = item.account_status === "Active" ? "Inactive" : "Active";
 
         try {
-            await updateUserStatus(item.user_id, {
-                account_status: newStatus
-            });
-
-            fetchUsers();
+            await updateUserStatus(item.user_id, { account_status: newStatus });
+            await fetchUsers();
         } catch (err) {
             console.log(err);
         }
@@ -128,11 +110,12 @@ export default function Users() {
         setemail(item.email);
         setRole(item.role_id || "");
         setpass("");
+        fetchRoles();
         setUpdateOpen(true);
     }
 
     function openViewModal(uid) {
-        fetchUserById(uid);
+        setSelectedUserId(uid);
         setViewOpen(true);
     }
 
@@ -146,7 +129,7 @@ export default function Users() {
                 role_id: Role
             });
 
-            fetchUsers();
+            await fetchUsers();
             setUpdateOpen(false);
         } catch (err) {
             console.log(err);
@@ -182,7 +165,6 @@ export default function Users() {
                         checked={item.account_status === "Active"}
                         onChange={() => updateStatusHandler(item)}
                     />
-
                     <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-green-500 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5"></div>
                 </label>
             )
@@ -196,13 +178,10 @@ export default function Users() {
             name: "Action",
             cell: item => (
                 <div className="flex gap-2 h-8.5">
-
                     {/* View */}
                     <button
                         className="bg-blue-500 text-white w-9 flex items-center justify-center px-2 py-1 rounded hover:bg-blue-600"
-                        onClick={() => {
-                            openViewModal(item.user_id)
-                        }}
+                        onClick={() => openViewModal(item.user_id)}
                     >
                         <AiFillEye />
                     </button>
@@ -222,7 +201,6 @@ export default function Users() {
                     >
                         <HiOutlineArchive />
                     </button>
-
                 </div>
             ),
         },
@@ -230,7 +208,6 @@ export default function Users() {
 
     return (
         <div className="bg-white p-6 rounded-lg shadow">
-
             <div className="flex justify-between items-center mb-5">
                 <div>
                     <h2 className="text-2xl font-bold">Users</h2>
@@ -291,7 +268,7 @@ export default function Users() {
                 updateUser={updateUser}
                 UserId={updateUserId}
             />
-
         </div>
     );
 }
+

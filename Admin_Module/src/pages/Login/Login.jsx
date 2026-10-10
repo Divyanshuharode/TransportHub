@@ -8,7 +8,7 @@ export default function Login() {
     const [pass, setPass] = useState("");
 
     const loginUser = async () => {
-        let res = await fetch("http://localhost:3000/login", {
+        let res = await fetch("http://localhost:5000/login", {
             method: "post",
             body: JSON.stringify({
                 email: email,
@@ -33,10 +33,7 @@ export default function Login() {
     return (
         <div
             className="min-h-screen flex items-center justify-center bg-cover bg-center"
-            style={{
-                backgroundImage:
-                    "url('https://images.pexels.com/photos/13551577/pexels-photo-13551577.jpeg')",
-            }}
+            style={{ backgroundImage: "url('https://images.pexels.com/photos/13551577/pexels-photo-13551577.jpeg')", }}
         >
             <div className="w-full max-w-sm bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl shadow-xl p-8">
                 <h1 className="text-3xl font-bold text-white text-center">Transport Booking System</h1>
