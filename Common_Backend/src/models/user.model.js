@@ -29,11 +29,8 @@ const updateStatusModel = (user_id, account_status, cbfn) => {
 };
 
 const getUserByIdModel = (user_id, cbfn) => {
-    const query = `SELECT u.user_id, u.full_name, u.email, u.account_status, u.created_at, r.role_name
-                   FROM users u
-                   LEFT JOIN role_assign ra ON u.user_id = ra.user_id
-                   LEFT JOIN roles = r.role_id
-                   WHERE u.user_id = ?`;
+    const query = ` SELECT u.user_id, u.full_name, u.email, u.account_status, u.created_at, r.role_name FROM users u
+                    LEFT JOIN role_assign ra ON u.user_id = ra.user_id LEFT JOIN roles r ON ra.role_id = r.role_id WHERE u.user_id = ? `;
     connection.query(query, [user_id], cbfn);
 };
 
@@ -42,4 +39,4 @@ const updateUserModel = (user_id, data, cbfn) => {
     connection.query(query, [data.full_name, data.email, user_id], cbfn);
 };
 
-module.exports = { getUsersModel, addUserModel, assignRoleModel, deleteUserModel, updateStatusModel, getUserByIdModel, updateUserModel };
+module.exports = { getUsersModel, addUserModel, assignRoleModel, deleteUserModel, updateStatusModel, getUserByIdModel, updateUserModel };   
