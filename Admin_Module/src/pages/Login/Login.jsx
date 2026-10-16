@@ -24,10 +24,12 @@ export default function Login() {
         // console.log("Status:", res.status);
         // console.log("Response:", data);
 
-        // if (res.ok) {
-        //     localStorage.setItem("token", data.token);
-        navigate("/admin");
-        // }
+        if (data.success === true) {
+            //     localStorage.setItem("token", data.token);
+            navigate("/admin");
+        } else {
+            alert("incorrect password entered")
+        }
     }
 
     return (

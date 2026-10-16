@@ -6,7 +6,7 @@ const { getUserByEmailModel } = require("../models/auth.model");
 const loginAdmin = (req, res, next) => {
     getUserByEmailModel(req.body.email, (err, data) => {
         if (err) return next(err);
-
+        console.log(data);
         if (data.length === 0) {
             return res.send({ success: false, message: "Invalid email or password", data: null });
         }
