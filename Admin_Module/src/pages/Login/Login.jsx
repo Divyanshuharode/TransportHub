@@ -25,7 +25,7 @@ export default function Login() {
         // console.log("Response:", data);
 
         if (data.success === true) {
-            //     localStorage.setItem("token", data.token);
+            localStorage.setItem("token", data.data.token);
             navigate("/admin");
         } else {
             alert("incorrect password entered")

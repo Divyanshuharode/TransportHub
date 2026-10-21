@@ -1,234 +1,127 @@
-import React from "react";
-
 function Settings() {
     return (
-        <div className="p-6">
-
-            {/* Header */}
+        <div className="min-h-full bg-slate-50 p-4 sm:p-6 lg:p-8">
             <div className="mb-6">
-                <h1 className="text-2xl font-bold">Settings</h1>
-                <p className="text-gray-500">Manage your TransportHub settings</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-600">Administration</p>
+                <h1 className="mt-1 text-3xl font-bold tracking-tight text-slate-900">Settings</h1>
+                <p className="mt-1 text-sm text-slate-500">Manage your TransportHub preferences.</p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-                {/* Settings Menu */}
-                <div className="bg-white rounded-xl shadow p-4 h-fit">
-                    <h2 className="font-semibold mb-4">Settings</h2>
-
-                    <div className="space-y-2">
-                        <button className="w-full text-left px-4 py-2 rounded-lg bg-indigo-50 text-indigo-600">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                <div className="h-fit rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <h2 className="mb-4 px-3 text-sm font-semibold text-slate-900">Settings menu</h2>
+                    <div className="space-y-1">
+                        <button className="w-full rounded-lg bg-blue-50 px-4 py-2.5 text-left text-sm font-semibold text-blue-700">
                             General
                         </button>
-
-                        <button className="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-50">
+                        <button className="w-full rounded-lg px-4 py-2.5 text-left text-sm text-slate-600 transition hover:bg-slate-50">
                             Booking
                         </button>
-
-                        <button className="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-50">
+                        <button className="w-full rounded-lg px-4 py-2.5 text-left text-sm text-slate-600 transition hover:bg-slate-50">
                             Notifications
                         </button>
-
-                        <button className="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-50">
+                        <button className="w-full rounded-lg px-4 py-2.5 text-left text-sm text-slate-600 transition hover:bg-slate-50">
                             Account
                         </button>
-
-                        <button className="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-50">
+                        <button className="w-full rounded-lg px-4 py-2.5 text-left text-sm text-slate-600 transition hover:bg-slate-50">
                             System
                         </button>
                     </div>
                 </div>
 
-                {/* Settings Content */}
-                <div className="lg:col-span-2 space-y-6">
-
-                    {/* General Settings */}
-                    <div className="bg-white rounded-xl shadow p-6">
-                        <h2 className="text-lg font-semibold">General Settings</h2>
-                        <p className="text-sm text-gray-500 mb-5">
-                            Basic information about your platform
-                        </p>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
+                <div className="space-y-6 lg:col-span-2">
+                    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+                        <h2 className="text-base font-semibold text-slate-900">General settings</h2>
+                        <p className="mb-5 mt-1 text-sm text-slate-500">Basic information about your platform.</p>
+                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div>
-                                <label className="block text-sm font-medium mb-1">
-                                    Platform Name
-                                </label>
-                                <input
-                                    type="text"
-                                    value="TransportHub"
-                                    readOnly
-                                    className="w-full border rounded-lg px-4 py-2.5 bg-gray-50"
-                                />
+                                <label className="mb-1.5 block text-sm font-medium text-slate-700">Platform name</label>
+                                <input type="text" value="TransportHub" readOnly className="w-full rounded-lg border border-slate-300 bg-slate-50 px-4 py-2.5 text-sm text-slate-700 outline-none" />
                             </div>
-
                             <div>
-                                <label className="block text-sm font-medium mb-1">
-                                    Contact Email
-                                </label>
-                                <input
-                                    type="email"
-                                    value="admin@transporthub.com"
-                                    readOnly
-                                    className="w-full border rounded-lg px-4 py-2.5 bg-gray-50"
-                                />
+                                <label className="mb-1.5 block text-sm font-medium text-slate-700">Contact email</label>
+                                <input type="email" value="admin@transporthub.com" readOnly className="w-full rounded-lg border border-slate-300 bg-slate-50 px-4 py-2.5 text-sm text-slate-700 outline-none" />
                             </div>
-
                             <div>
-                                <label className="block text-sm font-medium mb-1">
-                                    Contact Phone
-                                </label>
-                                <input
-                                    type="text"
-                                    value="+91 9876543210"
-                                    readOnly
-                                    className="w-full border rounded-lg px-4 py-2.5 bg-gray-50"
-                                />
+                                <label className="mb-1.5 block text-sm font-medium text-slate-700">Contact phone</label>
+                                <input type="text" value="+91 9876543210" readOnly className="w-full rounded-lg border border-slate-300 bg-slate-50 px-4 py-2.5 text-sm text-slate-700 outline-none" />
                             </div>
-
                             <div>
-                                <label className="block text-sm font-medium mb-1">
-                                    Currency
-                                </label>
-                                <select className="w-full border rounded-lg px-4 py-2.5">
-                                    <option>INR (₹)</option>
-                                    <option>USD ($)</option>
+                                <label className="mb-1.5 block text-sm font-medium text-slate-700">Currency</label>
+                                <select defaultValue="INR" className="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-700 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+                                    <option value="INR">INR (₹)</option>
+                                    <option value="USD">USD ($)</option>
                                 </select>
                             </div>
-
                         </div>
                     </div>
 
-                    {/* Booking Settings */}
-                    <div className="bg-white rounded-xl shadow p-6">
-                        <h2 className="text-lg font-semibold">Booking Settings</h2>
-                        <p className="text-sm text-gray-500 mb-5">
-                            Configure booking preferences
-                        </p>
-
-                        <div className="space-y-4">
-
-                            <div className="flex justify-between items-center">
+                    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+                        <h2 className="text-base font-semibold text-slate-900">Booking settings</h2>
+                        <p className="mb-5 mt-1 text-sm text-slate-500">Configure booking preferences.</p>
+                        <div className="space-y-5">
+                            <div className="flex items-center justify-between gap-4">
                                 <div>
-                                    <p className="font-medium">Auto Confirm Booking</p>
-                                    <p className="text-sm text-gray-500">
-                                        Automatically confirm new bookings
-                                    </p>
+                                    <p className="text-sm font-medium text-slate-800">Auto confirm booking</p>
+                                    <p className="mt-1 text-sm text-slate-500">Automatically confirm new bookings.</p>
                                 </div>
-
-                                <input type="checkbox" className="w-5 h-5" />
+                                <input type="checkbox" className="h-4 w-4 accent-blue-600" />
                             </div>
-
-                            <div className="flex justify-between items-center">
+                            <div className="flex items-center justify-between gap-4">
                                 <div>
-                                    <p className="font-medium">Allow Cancellation</p>
-                                    <p className="text-sm text-gray-500">
-                                        Allow customers to cancel bookings
-                                    </p>
+                                    <p className="text-sm font-medium text-slate-800">Allow cancellation</p>
+                                    <p className="mt-1 text-sm text-slate-500">Allow customers to cancel bookings.</p>
                                 </div>
-
-                                <input
-                                    type="checkbox"
-                                    defaultChecked
-                                    className="w-5 h-5"
-                                />
+                                <input type="checkbox" defaultChecked className="h-4 w-4 accent-blue-600" />
                             </div>
-
                         </div>
                     </div>
 
-                    {/* Notification Settings */}
-                    <div className="bg-white rounded-xl shadow p-6">
-                        <h2 className="text-lg font-semibold">Notifications</h2>
-                        <p className="text-sm text-gray-500 mb-5">
-                            Manage system notifications
-                        </p>
-
-                        <div className="space-y-4">
-
-                            <div className="flex justify-between items-center">
+                    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+                        <h2 className="text-base font-semibold text-slate-900">Notifications</h2>
+                        <p className="mb-5 mt-1 text-sm text-slate-500">Choose which updates you want to receive.</p>
+                        <div className="space-y-5">
+                            <div className="flex items-center justify-between gap-4">
                                 <div>
-                                    <p className="font-medium">Booking Notifications</p>
-                                    <p className="text-sm text-gray-500">
-                                        Get notified about booking updates
-                                    </p>
+                                    <p className="text-sm font-medium text-slate-800">Booking notifications</p>
+                                    <p className="mt-1 text-sm text-slate-500">Get notified about booking updates.</p>
                                 </div>
-
-                                <input
-                                    type="checkbox"
-                                    defaultChecked
-                                    className="w-5 h-5"
-                                />
+                                <input type="checkbox" defaultChecked className="h-4 w-4 accent-blue-600" />
                             </div>
-
-                            <div className="flex justify-between items-center">
+                            <div className="flex items-center justify-between gap-4">
                                 <div>
-                                    <p className="font-medium">Transporter Notifications</p>
-                                    <p className="text-sm text-gray-500">
-                                        Get notified about transporter updates
-                                    </p>
+                                    <p className="text-sm font-medium text-slate-800">Transporter notifications</p>
+                                    <p className="mt-1 text-sm text-slate-500">Get notified about transporter updates.</p>
                                 </div>
-
-                                <input
-                                    type="checkbox"
-                                    defaultChecked
-                                    className="w-5 h-5"
-                                />
+                                <input type="checkbox" defaultChecked className="h-4 w-4 accent-blue-600" />
                             </div>
-
                         </div>
                     </div>
 
-                    {/* Account Settings */}
-                    <div className="bg-white rounded-xl shadow p-6">
-                        <h2 className="text-lg font-semibold">Account Settings</h2>
-                        <p className="text-sm text-gray-500 mb-5">
-                            Manage administrator account
-                        </p>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
+                    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+                        <h2 className="text-base font-semibold text-slate-900">Account settings</h2>
+                        <p className="mb-5 mt-1 text-sm text-slate-500">Manage administrator account details.</p>
+                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div>
-                                <label className="block text-sm font-medium mb-1">
-                                    Admin Name
-                                </label>
-                                <input
-                                    type="text"
-                                    value="Administrator"
-                                    readOnly
-                                    className="w-full border rounded-lg px-4 py-2.5 bg-gray-50"
-                                />
+                                <label className="mb-1.5 block text-sm font-medium text-slate-700">Admin name</label>
+                                <input type="text" value="Administrator" readOnly className="w-full rounded-lg border border-slate-300 bg-slate-50 px-4 py-2.5 text-sm text-slate-700 outline-none" />
                             </div>
-
                             <div>
-                                <label className="block text-sm font-medium mb-1">
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    value="admin@transporthub.com"
-                                    readOnly
-                                    className="w-full border rounded-lg px-4 py-2.5 bg-gray-50"
-                                />
+                                <label className="mb-1.5 block text-sm font-medium text-slate-700">Email</label>
+                                <input type="email" value="admin@transporthub.com" readOnly className="w-full rounded-lg border border-slate-300 bg-slate-50 px-4 py-2.5 text-sm text-slate-700 outline-none" />
                             </div>
-
                         </div>
-
-                        <button className="mt-5 px-4 py-2 bg-indigo-600 text-white rounded-lg">
-                            Change Password
+                        <button className="mt-5 rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+                            Change password
                         </button>
                     </div>
 
-                    {/* Save */}
                     <div className="flex justify-end">
-                        <button className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
-                            Save Changes
+                        <button className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700">
+                            Save changes
                         </button>
                     </div>
-
                 </div>
-
             </div>
         </div>
     );

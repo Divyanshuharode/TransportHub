@@ -1,47 +1,42 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
 function RoleUpdateModal({ openUpdate, setOpenUpdate, Rid, Rname, setRname, saveRole }) {
-
     return (
-        <Dialog open={openUpdate} onClose={() => setOpenUpdate(false)} className="relative z-10" >
-            <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4">
-                <DialogPanel className="w-full max-w-md rounded-lg bg-white p-6">
-
-                    <DialogTitle className="text-xl font-semibold text-gray-900">
-                        Update Role {Rid}
+        <Dialog open={openUpdate} onClose={() => setOpenUpdate(false)} className="relative z-10">
+            <div className="fixed inset-0 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-sm">
+                <DialogPanel className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl">
+                    <DialogTitle className="text-xl font-semibold text-slate-900">
+                        Update Role
                     </DialogTitle>
-
+                    <p className="mt-1 text-sm text-slate-500">Edit the role name and save your changes.</p>
                     <div className="mt-5">
-                        <label className="block mb-2 text-sm font-medium text-gray-700"> Role Name </label>
+                        <label className="mb-2 block text-sm font-medium text-slate-700">Role Name</label>
                         <input
                             type="text"
                             value={Rname}
                             onChange={(e) => setRname(e.target.value)}
                             placeholder="Enter role name"
-                            className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                            className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                         />
                     </div>
                     <div className="mt-6 flex justify-end gap-3">
                         <button
                             onClick={() => setOpenUpdate(false)}
-                            className="rounded-md bg-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-300"
+                            className="rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
                         >
                             Cancel
                         </button>
-
                         <button
                             onClick={() => saveRole(Rid)}
-                            className="rounded-md bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600"
+                            className="rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700"
                         >
-                            Update
+                            Save Changes
                         </button>
                     </div>
                 </DialogPanel>
             </div>
-        </Dialog >
-    )
-
+        </Dialog>
+    );
 }
 
 export default RoleUpdateModal;

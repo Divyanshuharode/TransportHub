@@ -32,23 +32,19 @@ function CustomerModal({ open, setOpen, customer, onSave }) {
     return (
         <Dialog open={open} onClose={setOpen} className="relative z-50">
 
-            <DialogBackdrop className="fixed inset-0 bg-black/60" />
+            <DialogBackdrop className="fixed inset-0 bg-slate-950/50 backdrop-blur-sm" />
 
             <div className="fixed inset-0 flex items-center justify-center p-4">
 
-                <DialogPanel className="w-full max-w-lg rounded-xl bg-gray-900 shadow-2xl">
-
-                    {/* Header */}
-                    <div className="flex items-center justify-between
-                        border-b border-gray-700 px-6 py-4">
-
-                        <DialogTitle className="text-xl font-semibold text-white">
+                <DialogPanel className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white shadow-2xl">
+                    <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5">
+                        <DialogTitle className="text-xl font-semibold text-slate-900">
                             {customer ? "Edit Customer" : "Add Customer"}
                         </DialogTitle>
 
                         <button
                             onClick={() => setOpen(false)}
-                            className="text-gray-400 hover:text-white text-xl"
+                            className="text-2xl text-slate-400 transition hover:text-slate-700"
                         >
                             ×
                         </button>
@@ -56,7 +52,6 @@ function CustomerModal({ open, setOpen, customer, onSave }) {
                     </div>
 
 
-                    {/* Form */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6">
 
                         <Input
@@ -95,23 +90,18 @@ function CustomerModal({ open, setOpen, customer, onSave }) {
                     </div>
 
 
-                    {/* Footer */}
-                    <div className="flex justify-end gap-3
-                        border-t border-gray-700 px-6 py-4">
+                    <div className="flex justify-end gap-3 border-t border-slate-100 px-6 py-4">
 
                         <button
                             onClick={() => setOpen(false)}
-                            className="rounded-lg bg-gray-700 px-4 py-2
-                            text-sm text-white hover:bg-gray-600"
+                            className="rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
                         >
                             Cancel
                         </button>
 
                         <button
                             onClick={handleSubmit}
-                            className="rounded-lg bg-indigo-600 px-4 py-2
-                            text-sm font-medium text-white
-                            hover:bg-indigo-500"
+                            className="rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
                         >
                             {customer ? "Update Customer" : "Add Customer"}
                         </button>
@@ -137,7 +127,7 @@ function Input({
 }) {
     return (
         <div>
-            <label className="block text-sm text-gray-300 mb-1">
+            <label className="mb-1.5 block text-sm font-medium text-slate-700">
                 {label}
             </label>
 
@@ -147,11 +137,7 @@ function Input({
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                className="w-full rounded-lg border border-gray-700
-                bg-gray-800 px-3 py-2.5 text-white
-                placeholder-gray-500 outline-none
-                focus:border-indigo-500 focus:ring-1
-                focus:ring-indigo-500"
+                className="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
             />
         </div>
     );

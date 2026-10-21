@@ -1,37 +1,23 @@
+import { useNavigate } from "react-router-dom";
+
 function Navbar() {
+    const navigate = useNavigate();
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        navigate("/");
+    };
+
     return (
-        <header className="h-16 bg-slate-800 text-slate-100 border-slate-200 flex items-center justify-between px-6 ">
-
-            {/* Left Side */}
+        <header className="flex min-h-16 items-center justify-between gap-4 border-b border-slate-200 bg-white px-4 sm:px-6">
             <div>
-                <h1 className="text-2xl font-bold text-slate-100">
-                    Admin Panel
-                </h1>
-                <p className="text-sm text-slate-300">
-                    Welcome back 👋
-                </p>
+                <h1 className="text-sm font-semibold text-slate-800">Admin Panel</h1>
+                <p className="text-xs text-slate-500">Welcome back, Admin</p>
             </div>
-
-            {/* Right Side */}
-            <div className="flex items-center gap-4">
-
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    className="w-64 rounded-lg border border-slate-300 px-4 py-2 text-sm
-                               focus:outline-none focus:ring-2 focus:ring-indigo-900
-                               focus:border-indigo-100"
-                />
-
-                <button
-                    className="rounded-lg bg-indigo-600 px-4 py-2 text-white
-                               hover:bg-indigo-700 transition"
-                >
-                    Logout
-                </button>
-
+            <div className="flex items-center gap-3">
+                <input type="text" placeholder="Search..." className="hidden w-52 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 outline-none placeholder:text-slate-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 sm:block" />
+                <button onClick={logout} className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700">Logout</button>
             </div>
-
         </header>
     );
 }
