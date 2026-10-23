@@ -3,7 +3,9 @@ const {
     totalCustomersModel,
     activeCustomersModel,
     inActiveCustomersModel,
-    addCustomerModel
+    addCustomerModel,
+    updateCustomerModel,
+    deleteCustomerModel
 } = require("../models/customer.model");
 
 const getCustomers = (req, res, next) => {
@@ -43,4 +45,21 @@ const addCustomers = (req, res, next) => {
     });
 };
 
-module.exports = { getCustomers, totalCustomers, activeCustomers, inActiveCustomers, addCustomers };
+const updateCustomer = (req, res, next) => {
+    const customer_id = req.params.customer_id;
+    const data = []
+    updateCustomerModel(customer_id, data, (err, result) => {
+        if (err) { return next(err) }
+        res.send({ success: true, message: "Customer updated succesfully", data: result })
+    })
+}
+
+const deleteCustomer = (req, res, next) => {
+    const customer_id = req.params.customer_id;
+    deleteCustomerModel(customer_id, (err, result) => {
+        if (err) next(err)
+        res.send({ success: true, message: "customer deleted succsessfully", data: result })
+    });
+}
+
+module.exports = { getCustomers, totalCustomers, activeCustomers, inActiveCustomers, addCustomers, deleteCustomer };

@@ -25,4 +25,22 @@ const addCustomerModel = (data, cbfn) => {
     connection.query(query, [data.customer_name, data.email, data.mobile_number], cbfn);
 };
 
-module.exports = { getCustomersModel, totalCustomersModel, activeCustomersModel, inActiveCustomersModel, addCustomerModel };
+const updateCustomerModel = (customer_id, data, cbfn) => {
+    const query = "update customers set customer_name = ? where customer_id = ?";
+    connection.query(query, [data, customer_id], cbfn)
+}
+
+const deleteCustomerModel = (customer_id, cbfn) => {
+    const query = "delete from customers where customer_id = ? ";
+    connection.query(query, [customer_id], cbfn);
+}
+
+module.exports = {
+    getCustomersModel,
+    totalCustomersModel,
+    activeCustomersModel,
+    inActiveCustomersModel,
+    addCustomerModel,
+    updateCustomerModel,
+    deleteCustomerModel
+};

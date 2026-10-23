@@ -11,7 +11,7 @@ const addRoleModel = (role_name, cbfn) => {
 };
 
 const updateRoleModel = (role_id, role_name, cbfn) => {
-    const query = "UPDATE roles SET role_name = ? WHERE role_id = ?";
+    const query = "UPDATE roles SET role_name = upper(?) WHERE role_id = ?";
     connection.query(query, [role_name, role_id], cbfn);
 };
 
