@@ -15,9 +15,11 @@ import {
     ChevronsUpDown,
 } from "lucide-react";
 
+import { NavLink } from "react-router-dom";
+
 function Sidebar() {
     return (
-        <aside className="flex h-screen w-64 flex-col bg-[#111827] text-white">
+        <nav className="flex h-screen w-64 flex-col bg-[#111827] text-white">
 
             {/* Logo */}
             <div className="flex items-center gap-3 px-5 py-6">
@@ -43,15 +45,34 @@ function Sidebar() {
                     </p>
 
                     <div className="space-y-1">
-                        <div className="flex items-center gap-3 rounded-lg bg-blue-600 px-3 py-3 text-sm">
-                            <LayoutDashboard size={19} />
-                            Dashboard
-                        </div>
+                        {/* <div className="flex items-center gap-3 rounded-lg bg-blue-600 px-3 py-3 text-sm"> */}
 
-                        <div className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-gray-300">
-                            <Truck size={19} />
-                            My Vehicles
-                        </div>
+                        <NavLink
+                            to="/transporter" end
+                            className={({ isActive }) =>
+                                `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${isActive
+                                    ? "bg-blue-600 text-white shadow-md shadow-blue-950/30"
+                                    : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                                }`
+                            }
+                        >
+                            <LayoutDashboard size={19} />
+                            <span>Dashboard</span>
+                        </NavLink>
+                        {/* </div> */}
+
+                        {/* <NavLink
+                                to="/transporter" end
+                                className={({ isActive }) =>
+                                    `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${isActive
+                                        ? "bg-blue-600 text-white shadow-md shadow-blue-950/30"
+                                        : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                                    }`
+                                }
+                            >
+                                <Truck size={19} />
+                                <span> My Vehicles</span>
+                            </NavLink> */}
 
                         <div className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-gray-300">
                             <ClipboardList size={19} />
@@ -146,7 +167,7 @@ function Sidebar() {
 
                 <ChevronsUpDown size={17} className="text-gray-400" />
             </div>
-        </aside>
+        </nav>
     );
 }
 

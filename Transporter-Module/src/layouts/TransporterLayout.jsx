@@ -1,6 +1,8 @@
 import React from 'react'
 import Sidebar from '../component/sidebar/sidebar'
-import Dashboard from '../pages/dashboard/Dashboard'
+import Navbar from '../component/navbar/Navbar';
+import { Outlet } from 'react-router-dom';
+
 function TransporterLayout() {
     return (
         <div className="flex h-screen bg-gray-300">
@@ -9,11 +11,10 @@ function TransporterLayout() {
 
             <div className="flex flex-col flex-1 overflow-hidden">
 
-                {/* <Navbar /> */}
+                <Navbar />
 
                 <div className="flex-1 overflow-y-auto ">
-                    <Dashboard />
-                    {/* <Outlet /> */}
+                    <Outlet />
                 </div>
 
                 {/* <Footer /> */}
