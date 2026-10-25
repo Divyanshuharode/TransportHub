@@ -15,9 +15,16 @@ import {
     ChevronsUpDown,
 } from "lucide-react";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Sidebar() {
+    const navigate = useNavigate()
+
+    const logout = () => {
+        // localStorage.removeItem("token");
+        navigate("/");
+    };
+
     return (
         <nav className="flex h-screen w-64 flex-col bg-[#111827] text-white">
 
@@ -43,10 +50,7 @@ function Sidebar() {
                     <p className="mb-3 px-3 text-[11px] font-semibold tracking-widest text-gray-400">
                         MAIN MENU
                     </p>
-
                     <div className="space-y-1">
-                        {/* <div className="flex items-center gap-3 rounded-lg bg-blue-600 px-3 py-3 text-sm"> */}
-
                         <NavLink
                             to="/transporter" end
                             className={({ isActive }) =>
@@ -59,35 +63,48 @@ function Sidebar() {
                             <LayoutDashboard size={19} />
                             <span>Dashboard</span>
                         </NavLink>
-                        {/* </div> */}
-
-                        {/* <NavLink
-                                to="/transporter" end
-                                className={({ isActive }) =>
-                                    `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${isActive
-                                        ? "bg-blue-600 text-white shadow-md shadow-blue-950/30"
-                                        : "text-slate-300 hover:bg-slate-800 hover:text-white"
-                                    }`
-                                }
-                            >
-                                <Truck size={19} />
-                                <span> My Vehicles</span>
-                            </NavLink> */}
-
-                        <div className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-gray-300">
+                        <NavLink
+                            to="/transporter/vehicles"
+                            className={({ isActive }) =>
+                                `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${isActive
+                                    ? "bg-blue-600 text-white shadow-md shadow-blue-950/30"
+                                    : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                                }`
+                            }
+                        >
+                            <Truck size={19} />
+                            <span> My Vehicles</span>
+                        </NavLink>
+                        <NavLink
+                            to="/transporter/transportRequests"
+                            className={({ isActive }) =>
+                                `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${isActive
+                                    ? "bg-blue-600 text-white shadow-md shadow-blue-950/30"
+                                    : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                                }`
+                            }
+                        >
                             <ClipboardList size={19} />
-                            Transport Requests
-                        </div>
-
-                        <div className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-gray-300">
+                            <span>Transport Requests</span>
+                        </NavLink>
+                        <NavLink to="/transporter/bookings" className={({ isActive }) =>
+                            `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${isActive
+                                ? "bg-blue-600 text-white shadow-md shadow-blue-950/30"
+                                : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                            }`
+                        }>
                             <CalendarCheck size={19} />
                             My Bookings
-                        </div>
-
-                        <div className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-gray-300">
+                        </NavLink>
+                        <NavLink to="/transporter/livetracking" className={({ isActive }) =>
+                            `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${isActive
+                                ? "bg-blue-600 text-white shadow-md shadow-blue-950/30"
+                                : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                            }`
+                        }>
                             <MapPin size={19} />
                             Live Tracking
-                        </div>
+                        </NavLink>
                     </div>
                 </div>
 
@@ -98,20 +115,33 @@ function Sidebar() {
                     </p>
 
                     <div className="space-y-1">
-                        <div className="flex items-center gap-3 px-3 py-3 text-sm text-gray-300">
+                        <NavLink to="/transporter/drivers" className={({ isActive }) =>
+                            `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${isActive
+                                ? "bg-blue-600 text-white shadow-md shadow-blue-950/30"
+                                : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                            }`
+                        }>
                             <Users size={19} />
                             My Drivers
-                        </div>
-
-                        <div className="flex items-center gap-3 px-3 py-3 text-sm text-gray-300">
+                        </NavLink>
+                        <NavLink to="/transporter/earnings_payments" className={({ isActive }) =>
+                            `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${isActive
+                                ? "bg-blue-600 text-white shadow-md shadow-blue-950/30"
+                                : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                            }`
+                        }>
                             <Wallet size={19} />
                             Earnings & Payments
-                        </div>
-
-                        <div className="flex items-center gap-3 px-3 py-3 text-sm text-gray-300">
+                        </NavLink>
+                        <NavLink to="/transporter/reports" className={({ isActive }) =>
+                            `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${isActive
+                                ? "bg-blue-600 text-white shadow-md shadow-blue-950/30"
+                                : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                            }`
+                        }>
                             <ChartNoAxesColumn size={19} />
                             Reports
-                        </div>
+                        </NavLink>
                     </div>
                 </div>
 
@@ -122,20 +152,33 @@ function Sidebar() {
                     </p>
 
                     <div className="space-y-1">
-                        <div className="flex items-center gap-3 px-3 py-3 text-sm text-gray-300">
+                        <NavLink to="/transporter/profile" className={({ isActive }) =>
+                            `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${isActive
+                                ? "bg-blue-600 text-white shadow-md shadow-blue-950/30"
+                                : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                            }`
+                        }>
                             <UserRound size={19} />
                             My Profile
-                        </div>
-
-                        <div className="flex items-center gap-3 px-3 py-3 text-sm text-gray-300">
+                        </NavLink>
+                        <NavLink to="/transporter/documentsVerify" className={({ isActive }) =>
+                            `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${isActive
+                                ? "bg-blue-600 text-white shadow-md shadow-blue-950/30"
+                                : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                            }`
+                        }>
                             <FileCheck size={19} />
                             Documents & Verification
-                        </div>
-
-                        <div className="flex items-center gap-3 px-3 py-3 text-sm text-gray-300">
+                        </NavLink>
+                        <NavLink to="/transporter/settings" className={({ isActive }) =>
+                            `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${isActive
+                                ? "bg-blue-600 text-white shadow-md shadow-blue-950/30"
+                                : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                            }`
+                        }>
                             <Settings size={19} />
                             Settings
-                        </div>
+                        </NavLink>
                     </div>
                 </div>
             </div>
@@ -144,7 +187,7 @@ function Sidebar() {
             <div className="px-3 pb-3">
                 <div className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-red-400">
                     <LogOut size={19} />
-                    Logout
+                    <button onClick={logout}>Logout</button>
                 </div>
             </div>
 

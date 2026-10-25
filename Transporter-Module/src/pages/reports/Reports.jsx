@@ -1,9 +1,9 @@
 import React from 'react'
+import ModulePlaceholder from "../ModulePlaceholder"
 
 function Reports() {
     return (
-        <div>Reports</div>
+        <div><ModulePlaceholder /></div>
     )
-}
-
+};
 export default Reports

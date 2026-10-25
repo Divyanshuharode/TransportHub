@@ -3,9 +3,10 @@ import TransporterLayout from '../layouts/TransporterLayout';
 
 import Login from "../pages/login/Login";
 import Dashboard from "../pages/dashboard/Dashboard";
+import Vehicles from "../pages/vehicles/Vehicles";
 import Transport_Requests from "../pages/transport_Requests/Transport_Requests";
 import Bookings from "../pages/bookings/Bookings";
-import Booking_Tracking from "../pages/booking_Tracking/Booking_Tracking";
+import Live_Tracking from "../pages/live_Tracking/Live_Tracking";
 import Drivers from "../pages/drivers/Drivers";
 import Earnings_Payments from "../pages/Earnings_Payments/Earnings_Payments";
 import Reports from "../pages/reports/Reports";
@@ -21,18 +22,33 @@ function TransporterRoutes() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Login></Login>}></Route>
+
                 <Route path="/transporter" element={<TransporterLayout />}>
+
                     <Route index element={<Dashboard />}></Route>
-                    <Route path='' element={<Transport_Requests />}></Route>
-                    <Route path='' element={<Bookings />}></Route>
-                    <Route path='' element={<Booking_Tracking />}></Route>
-                    <Route path='' element={<Drivers />}></Route>
-                    <Route path='' element={<Earnings_Payments />}></Route>
-                    <Route path='' element={<Reports />}></Route>
-                    <Route path='' element={<Profile />}></Route>
-                    <Route path='' element={<Document_verification />}></Route>
-                    <Route path='' element={<Settings />}></Route>
+
+                    <Route path='vehicles' element={<Vehicles />}></Route>
+
+                    <Route path='transportRequests' element={<Transport_Requests />}></Route>
+
+                    <Route path='bookings' element={<Bookings />}></Route>
+
+                    <Route path='livetracking' element={<Live_Tracking />}></Route>
+
+                    <Route path='drivers' element={<Drivers />}></Route>
+
+                    <Route path='earnings_payments' element={<Earnings_Payments />}></Route>
+
+                    <Route path='reports' element={<Reports />}></Route>
+
+                    <Route path='profile' element={<Profile />}></Route>
+
+                    <Route path='documentsVerify' element={<Document_verification />}></Route>
+
+                    <Route path='settings' element={<Settings />}></Route>
+
                 </Route>
+
             </Routes>
         </BrowserRouter>
     )
