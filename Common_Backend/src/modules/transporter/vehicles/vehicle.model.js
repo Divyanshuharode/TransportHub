@@ -1,8 +1,7 @@
 const connection = require("../../../config/db");
 
 const addVehicleModel = (data, cbfn) => {
-    console.log(data);
-    const query = "insert into vehicles(transporter_id , vehicle_number ,vehicle_type , capacity) values (? , ? , ? , ?)";
+    const query = "insert into vehicles(vehicle_id, transporter_id, vehicle_number, vehicle_type, capacity) values (?, ?, ?, ?, ?)";
     connection.query(query, data, cbfn)
 }
 
@@ -26,7 +25,7 @@ const vehiclesCountModel = (cbfn) => {
 
 const deleteVehiclesModel = (vehicle_id, cbfn) => {
     const query = 'delete from vehicles where vehicle_id = ?';
-    connection.query(query, vehicle_id, cbfn)
+    connection.query(query, [vehicle_id], cbfn)
 }
 
 module.exports = {
