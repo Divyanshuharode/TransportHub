@@ -1,12 +1,12 @@
 const argon2 = require("argon2"); // hashing pass
 const jwt = require('jsonwebtoken'); //generate jwt token
-const { v4 } = require("uuid") // for random id generate --
+const generateUUID = require("../../../utility/uuid");
 
 const { registerTransporterModel, loginTransporterModel } = require("./auth.model");
 
 const registerTransporter = async (req, res, next) => {
     try {
-        const transporter_id = v4();
+        const transporter_id = generateUUID();
         const hashPassword = await argon2.hash(req.body.password);
         const data = [
             transporter_id,
@@ -19,7 +19,7 @@ const registerTransporter = async (req, res, next) => {
         registerTransporterModel(data, (err, result) => {
             if (err) return next(err);
 
-            return res.status(201).json({ success: true, message: "Registration successful", data: result, });
+            return res.status(201).json({ success: true, message: "Registration successful", data: { transporter_id, ...result } });
         });
     } catch (err) {
         return next(err);
