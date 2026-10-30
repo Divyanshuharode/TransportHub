@@ -1,7 +1,7 @@
 const connection = require("../../../config/db");
 
 const registerTransporterModel = (data, cbfn) => {
-    const query = `INSERT INTO transporters (transporter_name, email, mobile_number, password) VALUES (?, ?, ?, ?)`;
+    const query = `INSERT INTO transporters (transporter_id , transporter_name, email, mobile_number, password) VALUES (?, ?, ?, ?, ?)`;
 
     connection.query(query, data, cbfn);
 };

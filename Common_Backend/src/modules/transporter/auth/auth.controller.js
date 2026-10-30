@@ -1,11 +1,15 @@
 const argon2 = require("argon2"); // hashing pass
 const jwt = require('jsonwebtoken'); //generate jwt token
+const { v4 } = require("uuid") // for random id generate --
+
 const { registerTransporterModel, loginTransporterModel } = require("./auth.model");
 
 const registerTransporter = async (req, res, next) => {
     try {
+        const transporter_id = v4();
         const hashPassword = await argon2.hash(req.body.password);
         const data = [
+            transporter_id,
             req.body.transporter_name,
             req.body.email,
             req.body.mobile_number,

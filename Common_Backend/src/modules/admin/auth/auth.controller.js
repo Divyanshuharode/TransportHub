@@ -20,7 +20,7 @@ const loginAdmin = (req, res, next) => {
 
             try {
                 const user = { user_id: data[0].user_id, email: data[0].email };
-                const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1d" });
+                const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1m" });
 
                 res.send({ success: true, message: "Login successful", data: { token } });
             } catch (err) {
