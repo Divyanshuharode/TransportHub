@@ -4,7 +4,7 @@ const userSchema = joi.object({
     full_name: joi.string().min(3).max(50).required(),
     email: joi.string().email().required(),
     password: joi.string().min(4).max(255).required(),
-    role_id: joi.number().required()
+    role_id: joi.string().guid({ version: ["uuidv4"] }).required()
 });
 
 const schemaValidation = (req, res, next) => {
