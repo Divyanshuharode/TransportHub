@@ -1,3 +1,4 @@
+const generateUUID = require("../../../utility/uuid");
 const { getRolesModel, addRoleModel, updateRoleModel, deleteRoleModel } = require("./role.model");
 
 const getRoles = (req, res, next) => {
@@ -8,9 +9,10 @@ const getRoles = (req, res, next) => {
 };
 
 const addroles = (req, res, next) => {
-    addRoleModel(req.body.role_name, (err, result) => {
+    const role_id = generateUUID();
+    addRoleModel(role_id, req.body.role_name, (err, result) => {
         if (err) return next(err);
-        res.send({ success: true, message: "Role added successfully", data: result });
+        res.send({ success: true, message: "Role added successfully", data: { role_id, ...result } });
     });
 };
 
