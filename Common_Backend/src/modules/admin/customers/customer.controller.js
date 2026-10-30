@@ -1,3 +1,4 @@
+const generateUUID = require("../../../utility/uuid");
 const {
     getCustomersModel,
     totalCustomersModel,
@@ -37,11 +38,12 @@ const inActiveCustomers = (req, res, next) => {
 };
 
 const addCustomers = (req, res, next) => {
-    const data = { customer_name: req.body.customer_name, email: req.body.email, mobile_number: req.body.mobile_number };
+    const customer_id = generateUUID();
+    const data = { customer_id, customer_name: req.body.customer_name, email: req.body.email, mobile_number: req.body.mobile_number };
 
     addCustomerModel(data, (err, result) => {
         if (err) return next(err);
-        res.send({ success: true, message: "Customer added successfully", data: result });
+        res.send({ success: true, message: "Customer added successfully", data: { customer_id, ...result } });
     });
 };
 
@@ -57,7 +59,7 @@ const updateCustomer = (req, res, next) => {
 const deleteCustomer = (req, res, next) => {
     const customer_id = req.params.customer_id;
     deleteCustomerModel(customer_id, (err, result) => {
-        if (err) next(err)
+        if (err) return next(err)
         res.send({ success: true, message: "customer deleted succsessfully", data: result })
     });
 }
