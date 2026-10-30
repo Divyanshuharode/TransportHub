@@ -20,14 +20,14 @@ const addRoleAssign = (req, res, next) => {
 };
 
 const deleteRoleAssign = (req, res, next) => {
-    deleteRoleAssignModel(req.params.role_assign_id, (err, result) => {
+    deleteRoleAssignModel(req.params.user_id, req.params.role_id, (err, result) => {
         if (err) return next(err);
         res.send({ success: true, message: "Role assignment deleted successfully", data: result });
     });
 };
 
 const updateRoleAssign = (req, res, next) => {
-    updateRoleAssignModel(req.params.role_assign_id, req.body.user_id, req.body.role_id, (err, result) => {
+    updateRoleAssignModel(req.params.user_id, req.params.role_id, req.body.role_id, (err, result) => {
         if (err) return next(err);
         res.send({ success: true, message: "Role assignment updated successfully", data: result });
     });
