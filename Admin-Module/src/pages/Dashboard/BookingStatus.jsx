@@ -10,8 +10,8 @@ import {
 
 const data = [
     { name: "Completed", value: 10 },
-    { name: "Pending", value: 5 },
-    { name: "In Transit", value: 3 },
+    { name: "Pending", value: 4 },
+    { name: "In Transit", value: 7 },
     { name: "Cancelled", value: 1 },
 ];
 

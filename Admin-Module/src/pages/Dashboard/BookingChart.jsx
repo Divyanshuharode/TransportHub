@@ -1,12 +1,18 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, } from "recharts";
 
 const data = [
-    { month: "Jan", bookings: 0 },
-    { month: "Feb", bookings: 0 },
-    { month: "Mar", bookings: 0 },
-    { month: "Apr", bookings: 0 },
-    { month: "May", bookings: 0 },
-    { month: "Jun", bookings: 0 },
+    { month: "Jan", bookings: 45 },
+    { month: "Feb", bookings: 32 },
+    { month: "Mar", bookings: 55 },
+    { month: "Apr", bookings: 64 },
+    { month: "May", bookings: 45 },
+    { month: "Jun", bookings: 12 },
+    { month: "July", bookings: 29 },
+    { month: "aug", bookings: 22 },
+    { month: "sep", bookings: 44 },
+    { month: "oct", bookings: 86 },
+    { month: "nov", bookings: 0 },
+    { month: "dec", bookings: 0 },
 ];
 
 function BookingChart() {

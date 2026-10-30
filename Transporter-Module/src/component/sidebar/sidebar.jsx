@@ -20,8 +20,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 function Sidebar() {
     const navigate = useNavigate()
 
-    const logout = () => {
-        // localStorage.removeItem("token");
+    const logout = async () => {
+        await localStorage.removeItem("token")
         navigate("/");
     };
 

@@ -1,7 +1,9 @@
 import React from 'react'
 import TransporterLayout from '../layouts/TransporterLayout';
+import LandingPage from '../pages/LandingPage'
 
 import Login from "../pages/login/Login";
+import TransporterRegister from "../pages/login/SignUp"
 import Dashboard from "../pages/dashboard/Dashboard";
 import Vehicles from "../pages/vehicles/Vehicles";
 import Transport_Requests from "../pages/transport_Requests/Transport_Requests";
@@ -13,6 +15,7 @@ import Reports from "../pages/reports/Reports";
 import Profile from '../pages/profile/Profile';
 import Document_verification from "../pages/document_verification/Document_verification";
 import Settings from "../pages/settings/Settings"
+import ProtectedRoute from "./ProtectedRoute"
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -21,9 +24,13 @@ function TransporterRoutes() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Login></Login>}></Route>
+                <Route path="/" element={<LandingPage />}></Route>
 
-                <Route path="/transporter" element={<TransporterLayout />}>
+                <Route path="/login" element={<Login />}></Route>
+
+                <Route path="/register" element={<TransporterRegister />}></Route>
+
+                <Route path="/transporter" element={<ProtectedRoute><TransporterLayout /></ProtectedRoute>}>
 
                     <Route index element={<Dashboard />}></Route>
 

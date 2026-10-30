@@ -29,7 +29,7 @@ export default function UserAddModal({ open, setOpen, name, setname, email, sete
                         </div>
                     </div>
                     <div className="mt-6 flex justify-end gap-3">
-                        <button onClick={() => setOpen(false)} className="rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-red-600 bg-red-500">Cancel</button>
+                        <button onClick={() => setOpen(false)} className="rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-red-600 bg-red-500">Cancel</button>
                         <button onClick={addUser} className="rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700">Save </button>
                     </div>
                 </DialogPanel>

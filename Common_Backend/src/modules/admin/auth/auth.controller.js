@@ -30,8 +30,4 @@ const loginAdmin = (req, res, next) => {
     });
 };
 
-const loginTransporter = (req, res, next) => {
-
-}
-
 module.exports = { loginAdmin };

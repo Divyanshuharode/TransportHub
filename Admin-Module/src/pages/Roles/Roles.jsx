@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
+import Swal from "sweetalert2";
 import moment from "moment";
 
 import { FaEye } from "react-icons/fa";
@@ -17,7 +18,7 @@ import {
 const tableStyles = {
     headRow: { style: { minHeight: "48px", backgroundColor: "#f8fafc", borderBottom: "1px solid #e2e8f0" } },
     headCells: { style: { color: "#475569", fontSize: "12px", fontWeight: 600 } },
-    rows: { style: { minHeight: "58px", color: "#334155", fontSize: "13px" }, highlightOnHoverStyle: { backgroundColor: "#f8fafc" } },
+    rows: { style: { minHeight: "41px", color: "#334155", fontSize: "13px" }, highlightOnHoverStyle: { backgroundColor: "#f8fafc" } },
     pagination: { style: { borderTop: "1px solid #e2e8f0", color: "#64748b" } },
 };
 
@@ -45,6 +46,12 @@ export default function Roles() {
     const addRole = async () => {
         try {
             await addRoleApi({ role_name: rname });
+            await Swal.fire({
+                icon: "success",
+                title: "role added successfully",
+                text: "view roleList",
+                confirmButtonText: "ok",
+            })
             fetchRoles();
             setrname("");
             setOpen(false);
@@ -53,7 +60,7 @@ export default function Roles() {
         }
     };
 
-    function updateRole(item) {
+    async function updateRole(item) {
         setRid(item.role_id);
         setRname(item.role_name);
         setOpenUpdate(true);
@@ -62,6 +69,12 @@ export default function Roles() {
     const saveRole = async (id) => {
         try {
             await updateRoleApi(id, { role_name: Rname });
+            await Swal.fire({
+                icon: "success",
+                title: "role updated successfully",
+                text: "view roleList",
+                confirmButtonText: "ok",
+            })
             fetchRoles();
             setOpenUpdate(false);
             setRname("");

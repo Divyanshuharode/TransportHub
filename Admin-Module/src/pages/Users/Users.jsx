@@ -26,7 +26,7 @@ import Swal from "sweetalert2";
 const tableStyles = {
     headRow: { style: { minHeight: "48px", backgroundColor: "#f8fafc", borderBottom: "1px solid #e2e8f0" } },
     headCells: { style: { color: "#475569", fontSize: "12px", fontWeight: 600 } },
-    rows: { style: { minHeight: "60px", color: "#334155", fontSize: "13px" }, highlightOnHoverStyle: { backgroundColor: "#f8fafc" } },
+    rows: { style: { minHeight: "41px", color: "#0b0b0b", fontSize: "13px" }, highlightOnHoverStyle: { backgroundColor: "#f8fafc" } },
     pagination: { style: { borderTop: "1px solid #e2e8f0", color: "#64748b" } },
 };
 
@@ -75,7 +75,6 @@ export default function Users() {
         fetchUsers();
         // fetchRoles();
     }, []);
-
     // ADD user
     const addUser = async () => {
         try {
@@ -88,7 +87,7 @@ export default function Users() {
 
             await Swal.fire({
                 icon: "success",
-                title: "user added duccessfully",
+                title: "user added successfully",
                 text: "view userList",
                 confirmButtonText: "ok"
             })
@@ -173,6 +172,7 @@ export default function Users() {
     });
     // ------ users cards value 
     const totalUsers = users.length;
+
     const activeUsers = users.filter(item => item.account_status === "Active").length;
     const inactiveUsers = users.filter(item => item.account_status === "Inactive").length;
 
@@ -187,29 +187,26 @@ export default function Users() {
         {
             name: "Name",
             selector: item => item.full_name,
-            cell: item => <span className="font-medium text-slate-800">{item.full_name}</span>,
-            sortable: true,
-        },
-        {
-            name: "Email",
-            selector: item => item.email,
+            cell: item => (
+                <div className="py-2">
+                    <p >{item.full_name}</p>
+                    <p className="text-xs font-medium text-blue-400">{item.email}</p>
+                </div>
+            ),
             sortable: true,
         },
         {
             name: "Status",
             selector: item => item.account_status,
             cell: item => (
-                <div className="flex items-center gap-2">
-                    <input
-                        type="checkbox"
-                        className="h-4 w-4 cursor-pointer accent-blue-600"
-                        checked={item.account_status === "Active"}
-                        onChange={() => updateStatusHandler(item)}
-                    // aria-label={`Set ${item.full_name} status`}  
-                    />
-                    <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${item.account_status === "Active" ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-600"}`}>
-                        {item.account_status}
-                    </span>
+                <div className="flex items-center">
+                    <button
+                        type="button"
+                        onClick={() => updateStatusHandler(item)}
+                        className={`relative flex h-5.5 w-10 shrink-0 items-center rounded-full transition-colors duration-300 ${item.account_status === "Active" ? "bg-blue-600" : "bg-slate-300"}`}
+                    >
+                        <span className={`absolute left-0.9 h-5 w-5 rounded-full bg-white shadow transition-transform duration-300 ${item.account_status === "Active" ? "translate-x-5" : "translate-x-0"}`} />
+                    </button>
                 </div>
             )
         },
@@ -221,7 +218,7 @@ export default function Users() {
         {
             name: "Action",
             cell: item => (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                     <button
                         className="flex h-8 w-8 items-center justify-center rounded-md bg-blue-50 text-blue-700 transition hover:bg-blue-100"
                         onClick={() => openViewModal(item.user_id)}
@@ -238,14 +235,14 @@ export default function Users() {
                     >
                         <CiEdit />
                     </button>
-                    <button
+                    {/* <button
                         className="flex h-8 w-8 items-center justify-center rounded-md bg-rose-50 text-rose-600 transition hover:bg-rose-100"
                         onClick={() => deleteuser(item.user_id)}
                         title="Delete user"
                         aria-label="Delete user"
                     >
                         <HiOutlineArchive />
-                    </button>
+                    </button> */}
                 </div>
             ),
         },
@@ -326,6 +323,10 @@ export default function Users() {
                     data={filteredUsers}
                     customStyles={tableStyles}
                     pagination
+                    paginationPerPage={5}
+                    paginationComponentOptions={{
+                        noRowsPerPage: false,
+                    }}
                     highlightOnHover
                     responsive
                     noDataComponent={<div className="py-10 text-sm text-slate-500">No users found. Add a user to get started.</div>}
@@ -371,4 +372,3 @@ export default function Users() {
         </div>
     );
 }
-
