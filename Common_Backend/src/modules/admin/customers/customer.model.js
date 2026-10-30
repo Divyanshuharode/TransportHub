@@ -21,8 +21,8 @@ const inActiveCustomersModel = (cbfn) => {
 };
 
 const addCustomerModel = (data, cbfn) => {
-    const query = "INSERT INTO customers(customer_id, customer_name, email, mobile_number) VALUES (?, ?, ?, ?)";
-    connection.query(query, [data.customer_id, data.customer_name, data.email, data.mobile_number], cbfn);
+    const query = "INSERT INTO customers(customer_name, email, mobile_number) VALUES (?, ?, ?)";
+    connection.query(query, [data.customer_name, data.email, data.mobile_number], cbfn);
 };
 
 const updateCustomerModel = (customer_id, data, cbfn) => {
