@@ -10,14 +10,14 @@ const addRoleAssignModel = (user_id, role_id, cbfn) => {
     connection.query(query, [user_id, role_id], cbfn);
 };
 
-const deleteRoleAssignModel = (role_assign_id, cbfn) => {
-    const query = "DELETE FROM role_assign WHERE role_assign_id = ?";
-    connection.query(query, [role_assign_id], cbfn);
+const deleteRoleAssignModel = (user_id, role_id, cbfn) => {
+    const query = "DELETE FROM role_assign WHERE user_id = ? AND role_id = ?";
+    connection.query(query, [user_id, role_id], cbfn);
 };
 
-const updateRoleAssignModel = (role_assign_id, user_id, role_id, cbfn) => {
-    const query = "UPDATE role_assign SET user_id = ?, role_id = ? WHERE role_assign_id = ?";
-    connection.query(query, [user_id, role_id, role_assign_id], cbfn);
+const updateRoleAssignModel = (user_id, old_role_id, new_role_id, cbfn) => {
+    const query = "UPDATE role_assign SET role_id = ? WHERE user_id = ? AND role_id = ?";
+    connection.query(query, [new_role_id, user_id, old_role_id], cbfn);
 };
 
 module.exports = { getRoleAssignModel, addRoleAssignModel, deleteRoleAssignModel, updateRoleAssignModel };
