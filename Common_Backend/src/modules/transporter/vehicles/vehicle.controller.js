@@ -4,7 +4,7 @@ const {
     getVehicleModel,
     vehiclesCountModel,
     deleteVehiclesModel
-} = require("../vehicles/vehicle.model");
+} = require("./vehicle.model");
 
 const addVehicle = (req, res, next) => {
     const vehicle_id = generateUUID();
