@@ -13,8 +13,8 @@ roleAssignRoute.get("/viewroleassign", getRoleAssign);
 
 roleAssignRoute.post("/addroleassign", addRoleAssign);
 
-roleAssignRoute.delete("/deleteroleassign/:role_assign_id", deleteRoleAssign);
+roleAssignRoute.delete("/deleteroleassign/:user_id/:role_id", deleteRoleAssign);
 
-roleAssignRoute.patch("/updateroleassign/:role_assign_id", updateRoleAssign);
+roleAssignRoute.patch("/updateroleassign/:user_id/:role_id", updateRoleAssign);
 
 module.exports = roleAssignRoute;
