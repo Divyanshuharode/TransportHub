@@ -5,9 +5,9 @@ const getRolesModel = (cbfn) => {
     connection.query(query, cbfn);
 };
 
-const addRoleModel = (role_name, cbfn) => {
-    const query = "INSERT INTO roles(role_name) VALUES (?)";
-    connection.query(query, [role_name], cbfn);
+const addRoleModel = (role_id, role_name, cbfn) => {
+    const query = "INSERT INTO roles(role_id, role_name) VALUES (?, ?)";
+    connection.query(query, [role_id, role_name], cbfn);
 };
 
 const updateRoleModel = (role_id, role_name, cbfn) => {
