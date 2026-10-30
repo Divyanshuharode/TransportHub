@@ -6,8 +6,8 @@ const getUsersModel = (cbfn) => {
 };
 
 const addUserModel = (data, cbfn) => {
-    const query = "INSERT INTO users (full_name, email, password) VALUES (UPPER(?), ?, ?)";
-    connection.query(query, [data.full_name, data.email, data.password], cbfn);
+    const query = "INSERT INTO users (user_id, full_name, email, password) VALUES (?, UPPER(?), ?, ?)";
+    connection.query(query, [data.user_id, data.full_name, data.email, data.password], cbfn);
 };
 
 const assignRoleModel = (user_id, role_id, cbfn) => {
@@ -16,16 +16,30 @@ const assignRoleModel = (user_id, role_id, cbfn) => {
 };
 
 const deleteUserModel = (user_id, cbfn) => {
-    const query = "DELETE FROM role_assign WHERE user_id = ?";
-    connection.query(query, [user_id], (err) => {
-        if (err) return cbfn(err);
-        connection.query("DELETE FROM users WHERE user_id = ?", [user_id], cbfn);
+    const checkQuery = "SELECT r.role_name FROM role_assign ra JOIN roles r ON ra.role_id = r.role_id WHERE ra.user_id = ?";
+    connection.query(checkQuery, [user_id], (checkErr, roles) => {
+        if (checkErr) return cbfn(checkErr);
+        if (roles.some((role) => role.role_name === "SUPER_ADMIN")) {
+            return cbfn(null, { protectedAdmin: true });
+        }
+
+        connection.query("DELETE FROM role_assign WHERE user_id = ?", [user_id], (err) => {
+            if (err) return cbfn(err);
+            connection.query("DELETE FROM users WHERE user_id = ?", [user_id], cbfn);
+        });
     });
 };
 
 const updateStatusModel = (user_id, account_status, cbfn) => {
-    const query = "UPDATE users SET account_status = ? WHERE user_id = ?";
-    connection.query(query, [account_status, user_id], cbfn);
+    const checkQuery = "SELECT r.role_name FROM role_assign ra JOIN roles r ON ra.role_id = r.role_id WHERE ra.user_id = ?";
+    connection.query(checkQuery, [user_id], (checkErr, roles) => {
+        if (checkErr) return cbfn(checkErr);
+        if (roles.some((role) => role.role_name === "SUPER_ADMIN")) {
+            return cbfn(null, { protectedAdmin: true });
+        }
+        const query = "UPDATE users SET account_status = ? WHERE user_id = ?";
+        connection.query(query, [account_status, user_id], cbfn);
+    });
 };
 
 const getUserByIdModel = (user_id, cbfn) => {
@@ -39,4 +53,4 @@ const updateUserModel = (user_id, data, cbfn) => {
     connection.query(query, [data.full_name, data.email, user_id], cbfn);
 };
 
-module.exports = { getUsersModel, addUserModel, assignRoleModel, deleteUserModel, updateStatusModel, getUserByIdModel, updateUserModel };   
+module.exports = { getUsersModel, addUserModel, assignRoleModel, deleteUserModel, updateStatusModel, getUserByIdModel, updateUserModel };
