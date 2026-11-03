@@ -1,4 +1,3 @@
-
 import {
     Truck,
     LayoutDashboard,
@@ -16,12 +15,14 @@ import {
 } from "lucide-react";
 
 import { NavLink, useNavigate } from "react-router-dom";
+import transporterStore from "../../store/transporter.store";
 
 function Sidebar() {
     const navigate = useNavigate()
+    const { logOut } = transporterStore();
 
-    const logout = async () => {
-        await localStorage.removeItem("token")
+    const logout = () => {
+        logOut();
         navigate("/");
     };
 

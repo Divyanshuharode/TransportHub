@@ -1,12 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import transporterStore from "../store/transporter.store";
 
 function ProtectedRoute({ children }) {
-    const navigate = useNavigate();
-    const token = localStorage.getItem("token");
-    console.log(token);
+    const { isAuthenticated } = transporterStore();
 
-    if (!token) {
-        navigate("/login")
+    if (!isAuthenticated) {
         return <Navigate to="/login" replace />;
     }
 

@@ -20,9 +20,19 @@ const loginAdmin = (req, res, next) => {
 
             try {
                 const user = { user_id: data[0].user_id, email: data[0].email };
+
                 const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1m" });
 
-                res.send({ success: true, message: "Login successful", data: { token } });
+                res.cookie("adminToken", token, { httpOnly: true, sameSite: "lax", path: "/" });
+
+                res.send({
+                    success: true,
+                    message: "Login successful",
+                    data: {
+                        user_id: data[0].user_id,
+                        email: data[0].email
+                    }
+                });
             } catch (err) {
                 next(err);
             }

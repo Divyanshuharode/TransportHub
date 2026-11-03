@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom"
 import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { loginTransporter } from "../../services/auth.service"
+import transporterStore from "../../store/transporter.store";
 
 function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { loginInfo } = transporterStore();
 
     async function login() {
         try {
@@ -16,24 +18,27 @@ function Login() {
             const result = await loginTransporter(data);
 
             if (result.data.success === true) {
-                localStorage.setItem("token", result.data.token);
+
+                loginInfo(result.data.data);// zustand ka function 
+
                 await Swal.fire({
                     icon: "success",
                     title: result.data.message,
                     text: "go to dashboard",
                     confirmButtonText: "okeyy"
-                })
+                });
+
+                navigate("/transporter");
             }
-            navigate("/transporter")
+
         } catch (err) {
             await Swal.fire({
                 icon: "error",
-                title: "somthing went wrong",
+                title: "something went wrong",
                 text: "try again",
                 confirmButtonText: "login again"
-            })
+            });
         }
-
     };
 
     return (

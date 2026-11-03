@@ -1,9 +1,11 @@
 import { Navigate } from "react-router-dom";
+import adminStore from "../store/admin.store";
 
 function ProtectedRoute({ children }) {
-    const token = localStorage.getItem("token");
 
-    if (!token) {
+    const { isAuthenticated } = adminStore();
+
+    if (!isAuthenticated) {
         return <Navigate to="/" replace />;
     }
 

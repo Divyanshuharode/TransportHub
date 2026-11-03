@@ -1,45 +1,51 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { loginAdmin } from "../../services/auth.service";
+import adminStore from "../../store/admin.store";
 
 export default function Login() {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
+    const { loginInfo } = adminStore();
 
     const loginUser = async () => {
-        let res = await fetch("http://localhost:5000/login", {
-            method: "post",
-            body: JSON.stringify({
+        try {
+            const res = await loginAdmin({
                 email: email,
                 password: pass
-            }),
-            headers: {
-                "content-type": "application/json"
-            }
-        })
-        const data = await res.json();
-
-        if (data.success === true) {
-            localStorage.setItem("token", data.data.token);
-            await Swal.fire({
-                icon: "success",
-                title: "Login successful",
-                text: "Welcome to TransportHub",
-                width: "400px",
-                padding: "1.5rem",
-                confirmButtonText: "Go to dashboard",
-                confirmButtonColor: "#2563eb",
-                customClass: {
-                    popup: "login-success-popup",
-                },
             });
-            navigate("/admin");
-        } else {
-            alert("incorrect password entered")
+
+            const data = res.data;
+
+            if (data.success === true) {
+                loginInfo(data.data);
+
+                await Swal.fire({
+                    icon: "success",
+                    title: "Login successful",
+                    text: "Welcome to TransportHub",
+                    width: "400px",
+                    padding: "1.5rem",
+                    confirmButtonText: "Go to dashboard",
+                    confirmButtonColor: "#2563eb",
+                    customClass: {
+                        popup: "login-success-popup",
+                    },
+                });
+
+                navigate("/admin");
+            } else {
+                alert("Incorrect email or password");
+            }
+
+        } catch (error) {
+            console.log(error);
+            alert("Something went wrong");
         }
-    }
+    };
 
     return (
         <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 p-4">
