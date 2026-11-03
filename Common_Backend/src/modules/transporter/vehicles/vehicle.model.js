@@ -12,14 +12,15 @@ const getVehicleModel = (cbfn) => {
 
 const vehiclesCountModel = (cbfn) => {
     const query =
-        ` SELECT
-            COUNT(*) AS totalVehicles,
-            COUNT(status = 'AVAILABLE') AS activeVehicles,
-            COUNT(status = 'ON_TRIP') AS on_TripVehicles,
-            COUNT(status = 'MAINTENANCE') AS maintenanceVehicles,
-            COUNT(status = 'INACTIVE') AS inactiveVehicles
+        `SELECT
+           COUNT(*) AS totalVehicles,
+           SUM(status = 'AVAILABLE') AS activeVehicles,
+           SUM(status = 'ON_TRIP') AS on_TripVehicles,
+           SUM(status = 'MAINTENANCE') AS maintenanceVehicles,
+           SUM(status = 'INACTIVE') AS inactiveVehicles
         FROM vehicles
-    `;
+        WHERE transporter_id = ?
+`;
     connection.query(query, cbfn);
 };
 

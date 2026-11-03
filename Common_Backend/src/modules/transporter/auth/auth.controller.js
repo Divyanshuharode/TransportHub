@@ -43,10 +43,28 @@ const loginTransporter = async (req, res, next) => {
             }
             const { transporter_id, role, account_status } = data[0];
             // console.log(transporter_id, role, account_status);
+            if (account_status !== "ACTIVE") {
+                return res.status(403).send({ success: false, message: "Your account is not active", data: null });
+            }
 
-            const token = await jwt.sign({ transporter_id, role, account_status }, "hello", { expiresIn: "1m" });
+            const token = jwt.sign({ transporter_id, role, account_status }, process.env.JWT_SECRET, { expiresIn: "1m" });
 
-            return res.send({ success: true, message: "Login successful", data: data[0], token: token });
+            res.cookie("token", token, {
+                httpOnly: true, //frontend JavaScript cookie ko access nahi kar sakta.(XSS attack)
+                sameSite: "lax",  //Normal navigation mein limited cross-site cookie support
+                path: "/" //cookie website ke sabhi paths par available hog
+            });
+
+            return res.status(200).send({
+                success: true, message: "Login successful",
+                data: {
+                    transporter_id,
+                    role,
+                    account_status,
+                    email: data[0].email
+                }
+            });
+            // return res.send({ success: true, message: "Login successful", data: data[0], token: token });
         });
     } catch (err) {
         return next(err);

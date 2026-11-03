@@ -19,7 +19,7 @@ function Login() {
                 localStorage.setItem("token", result.data.token);
                 await Swal.fire({
                     icon: "success",
-                    title: "login successfully",
+                    title: result.data.message,
                     text: "go to dashboard",
                     confirmButtonText: "okeyy"
                 })
